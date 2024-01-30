@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Santa Cecília</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='img/favicon.png') }}">
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+<link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  
+ 
+  <!-- Referência usando a sintaxe Jinja -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-x-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="{{ url_for('static', filename='img/download.jpg') }}"  alt="..."class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">Santa Cecília</a></h1>
+        <div class="social-links mt-3 text-center">
+          
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Início</span></a></li>
+          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-calendar"></i> <span>Escalas</span></a></li>
+          
+          <li><a href="#equipes" class="nav-link scrollto"><i class="bx bx-group"></i> <span>Equipes</span></a></li>
+          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contatos</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="hero-container" data-aos="fade-in">
+      <h1>Ministério Liturgico </h1>
+      <p>Santa Cecília | <span class="typed" data-typed-items="Rogai por nós, Intercedei, Abençoa"></span></p>
+    </div>
+  </section><!-- End Hero -->
+
+<!-- ======= Escala de Missas Section ======= -->
+<section id="escala-de-missas" class="escala-de-missas">
+  <div class="container">
+    <div class="section-title">
+      <h2>Escalas de Missas</h2>
+      <p>Prezados, esperamos que esta mensagem os encontre bem e em paz. Gostaríamos de informar que estamos iniciando o processo de organização da escala das missas para os próximos meses e contamos com a colaboração de todos os fiéis para garantir uma distribuição equitativa das responsabilidades. A participação ativa de voluntários na organização das celebrações é fundamental para o bom funcionamento da nossa comunidade. Desta forma, convidamos todos aqueles que desejam contribuir para a realização das missas a participar da sessão de marcação da escala.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Carrossel de Administração ======= -->
+<section id="admin-carousel" class="admin-carousel">
+  <div class="container">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for carousel_item in carousel_items %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <img src="{{ url_for('static', filename='img/' + carousel_item.image_filename) }}" class="d-block w-100" alt="{{ carousel_item.image_alt }}">
+            <div class="carousel-caption d-md-block">
+                <h3><a href="{{ url_for('form', domingo=carousel_item.link_text) }}">{{ carousel_item.link_text }}</a></h3>
+                <p>{{ carousel_item.caption }} | {{ carousel_item.team_type }}</p>
+               
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Equipes Section ======= -->
+<section id="equipes" class="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Equipes</h2>
+    </div>
+    <div class="container mt-5">
+      <!-- Renderização dinâmica das equipes -->
+      {% for carousel_item in carousel_items %}
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ carousel_item.link_text }}</h3>
+          <h3 class="card-title">{{ carousel_item.team_type }}</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th>Nome</th>
+                <th>Função</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for resposta in respostas %}
+                
+                  <tr>
+                    <td>{{ resposta.nome }}</td>
+                    <td>{{ "Tocar" if resposta.tocar else "" }}{{ "Cantar" if resposta.cantar else "" }}</td>
+                  </tr>
+               
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section><!-- Equipes Section -->
+
+
+
+
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
+      <div class="section-title">
+          <h2>Contatos</h2>
+          <p>Aqui você pode mandar sugestões e saber onde fica a Paróquia Sagrado Coração de Jesus.</p>
+      </div>
+      <div class="row" data-aos="fade-in">
+          <div class="col-lg-5 d-flex align-items-stretch">
+              <div class="info">
+                  <div class="address">
+                      <i class="bi bi-geo-alt"></i>
+                      <h4>Local</h4>
+                      <p>Praça Antônio Ribeiro Pessoa - Popular, Santa Rita - PB, 58301-460</p>
+                  </div>
+                  <div class="email">
+                      <i class="bi bi-envelope"></i>
+                      <h4>Email:</h4>
+                      <p>info@example.com</p>
+                  </div>
+                  <div class="phone">
+                      <i class="bi bi-phone"></i>
+                      <h4>Telefone:</h4>
+                      <p>(83) 2177-3713</p>
+                  </div>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d126684.6393661129!2d-35.0631183391476!3d-7.13814179396145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x7acef20bf510d93%3A0x6d6e652e58a58224!2sPra%C3%A7a%20Ant%C3%B4nio%20Ribeiro%20Pessoa%20-%20Popular%2C%20Santa%20Rita%20-%20PB%2C%2058301-460!3m2!1d-7.1381635999999995!2d-34.9805472!5e0!3m2!1spt-BR!2sbr!4v1706262046187!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+          </div>
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="https://formsubmit.co/severinogouveia59@gmail.com" method="POST" role="form" class="php-email-form">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="http://127.0.0.1:5000" >
+
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Seu Nome</label>
+                        <input type="text" name="name" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Seu Email</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Assunto</label>
+                    <input type="text" class="form-control" name="subject" id="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea class="form-control" name="message" rows="10" required></textarea>
+                </div>
+                <div class="my-3">
+                    <div class="loading">Carregando</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Sua mensagem foi enviada. Obrigado!</div>
+                </div>
+                <div class="text-center"><button type="submit" id="submitButton">Enviar Mensagem</button></div>
+
+                <a href="{{ url_for('thanks') }}" id="thanksLink"></a>
+
+               
+            </form>
+        </div>
+        
+      </div>
+  </div>
+</section><!-- End Contact Section -->
+
+<script>
+  document.getElementById('submitButton').addEventListener('click', function() {
+      document.getElementById('thanksLink').click();
+  });
+</script>
+  
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+     
+     
+
+        Designed by <a href="https://bootstrapmade.com/">Severino Gouveia</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Inclua o jQuery antes do Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+  <!-- Vendor JS Files -->
+<script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/typed.js/typed.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/waypoints/noframework.waypoints.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+
+
+
+  <!-- Template Main JS File -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>
