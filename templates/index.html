@@ -74,7 +74,7 @@
   </section><!-- End Hero -->
 
 <!-- ======= Escala de Missas Section ======= -->
-<section id="escala-de-missas" class="escala-de-missas">
+<section id="about" class="escala-de-missas">
   <div class="container">
     <div class="section-title">
       <h2>Escalas de Missas</h2>
@@ -83,74 +83,72 @@
   </div>
 </section>
 
-<!-- ======= Carrossel de Administração ======= -->
+<!-- Carrossel de Administração -->
 <section id="admin-carousel" class="admin-carousel">
   <div class="container">
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        {% for carousel_item in carousel_items %}
-        <div class="carousel-item {% if loop.first %}active{% endif %}">
-            <img src="{{ url_for('static', filename='img/' + carousel_item.image_filename) }}" class="d-block w-100" alt="{{ carousel_item.image_alt }}">
-            <div class="carousel-caption d-md-block">
-                <h3><a href="{{ url_for('form', domingo=carousel_item.link_text) }}">{{ carousel_item.link_text }}</a></h3>
-                <p>{{ carousel_item.caption }} | {{ carousel_item.team_type }}</p>
-               
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+              {% for carousel_item in carousel_items %}
+              <div class="carousel-item {% if loop.first %}active{% endif %}">
+                  <img src="{{ url_for('static', filename='img/' + carousel_item.image_filename) }}" class="d-block w-100" alt="{{ carousel_item.image_alt }}">
+                  <div class="carousel-caption d-md-block">
+                      <h3><a href="{{ url_for('form', domingo=carousel_item.link_text) }}">{{ carousel_item.link_text }}</a></h3>
+                      <p>{{ carousel_item.caption }} | {{ carousel_item.team_type }}</p>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+          </button>
+      </div>
   </div>
 </section>
 
-<!-- ======= Equipes Section ======= -->
+<!-- Equipes Section -->
 <section id="equipes" class="contact">
   <div class="container">
-    <div class="section-title">
-      <h2>Equipes</h2>
-    </div>
-    <div class="container mt-5">
-      <!-- Renderização dinâmica das equipes -->
-      {% for carousel_item in carousel_items %}
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">{{ carousel_item.link_text }}</h3>
-          <h3 class="card-title">{{ carousel_item.team_type }}</h3>
-        </div>
-        <div class="card-body">
-          <table class="table table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th>Nome</th>
-                <th>Função</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for resposta in respostas %}
-                
-                  <tr>
-                    <td>{{ resposta.nome }}</td>
-                    <td>{{ "Tocar" if resposta.tocar else "" }}{{ "Cantar" if resposta.cantar else "" }}</td>
-                  </tr>
-               
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+      <div class="section-title">
+          <h2>Equipes</h2>
       </div>
-      {% endfor %}
-    </div>
+      <div class="container mt-5">
+          <!-- Renderização dinâmica das equipes -->
+          {% for carousel_item in carousel_items %}
+          <div class="card">
+              <div class="card-header">
+                  <h3 class="card-title">{{ carousel_item.link_text }}</h3>
+                  <h3 class="card-title">{{ carousel_item.team_type }}</h3>
+              </div>
+              <div class="card-body">
+                  <table class="table table-bordered">
+                      <thead class="thead-dark">
+                          <tr>
+                              <th>Nome</th>
+                              <th>Função</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for resposta in carousel_item.respostas %}
+                          <tr>
+                              <td>{{ resposta.nome }}</td>
+                              <td>{{ "Tocar" if resposta.tocar else "" }}{{ "Cantar" if resposta.cantar else "" }}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
   </div>
 </section><!-- Equipes Section -->
+
 
 
 

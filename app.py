@@ -35,21 +35,23 @@ class CarouselItemAdmin(ModelView):
                                            thumbnail_size=(100, 100, True))
     }
 
-# Define o modelo Resposta
 class Resposta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     tocar = db.Column(db.Integer)
     cantar = db.Column(db.Integer)
-    
     receber_email = db.Column(db.Integer)
     email = db.Column(db.String(100))
     evento = db.Column(db.String(100))  # Adicione o campo evento
 
+    carousel_item_id = db.Column(db.Integer, db.ForeignKey('carousel_item.id', name='fk_resposta_carousel_item'))
+    carousel_item = db.relationship('CarouselItem', backref=db.backref('respostas', lazy=True))
+
+
+
 # Define a visualização para o Flask-Admin para o modelo Resposta
 class RespostaAdmin(ModelView):
-    form_columns = ['nome', 'tocar', 'cantar', 'receber_email', 'email', 'evento']
-
+    form_columns = ['nome', 'tocar', 'cantar', 'receber_email', 'email', 'evento', 'carousel_item']
 
 # Registra os modelos e as visualizações no Flask-Admin
 admin = Admin(app, name='Painel de Administração', template_mode='bootstrap3')
@@ -61,12 +63,13 @@ from flask import request
 @app.route('/')
 def index():
     respostas = Resposta.query.all()
+    print("Respostas encontradas:")
+    for resposta in respostas:
+        print(f"Nome: {resposta.nome}, Evento: {resposta.evento}, Tocar: {resposta.tocar}, Cantar: {resposta.cantar}")  
+        # Imprime o nome, evento, tocar e cantar de cada resposta
     carousel_items = CarouselItem.query.all()
     team_types = set([item.team_type for item in carousel_items])
     return render_template('index.html', respostas=respostas, carousel_items=carousel_items, team_types=team_types)
-
-
-
 
 @app.route('/enviar', methods=['POST'])
 def enviar():
@@ -78,28 +81,28 @@ def enviar():
 
     evento = request.form.get('domingo')  
 
+    carousel_item_id = request.form.get('carousel_item_id')
 
-    resposta = Resposta(nome=nome, tocar=tocar, cantar=cantar, receber_email=receber_email, email=email, evento=evento)  # Adiciona o evento à resposta
+    resposta = Resposta(nome=nome, tocar=tocar, cantar=cantar, receber_email=receber_email, email=email, evento=evento, carousel_item_id=carousel_item_id)  # Adiciona o evento à resposta
     db.session.add(resposta)
     db.session.commit()
 
     return redirect(url_for('index'))
 
-
-
 @app.route('/thanks')
 def thanks():
     return render_template('thanks.html')
-
 
 @app.route('/form.html/<domingo>', methods=['GET', 'POST'])
 def form(domingo):
     if request.method == 'POST':
         return redirect(url_for('enviar', domingo=domingo))  # Passa o valor de domingo para a função enviar()
 
-    return render_template('form.html', domingo=domingo)
+ 
+    # Por exemplo:
+    carousel_item = CarouselItem.query.filter_by(link_text=domingo).first()
 
+    return render_template('form.html', domingo=domingo, carousel_item=carousel_item)
 
 if __name__ == '__main__':
     app.run(debug=True)
-

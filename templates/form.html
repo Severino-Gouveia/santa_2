@@ -86,6 +86,9 @@
           <div class="col-md-6">
             <form id="meuFormulario" action="{{ url_for('enviar', domingo=domingo) }}" method="post">
               <input type="hidden" name="domingo" value="{{ domingo }}">
+              <!-- Adicionando o campo oculto para o carousel_item_id -->
+              
+              <input type="hidden" name="carousel_item_id" value="{{ carousel_item.id }}">
               <div class="form-group">
                   <label for="nome">Nome:</label>
                   <input type="text" class="form-control" id="nome" name="nome" required>
@@ -116,6 +119,7 @@
     </div>
   </div>
 </section><!-- End form Section -->
+
 
 <!-- Adicione um botão de confirmação após o formulário -->
 
