@@ -83,6 +83,8 @@
   </div>
 </section>
 
+
+
 <!-- Carrossel de Administração -->
 <section id="admin-carousel" class="admin-carousel">
   <div class="container">
@@ -147,9 +149,28 @@
           {% endfor %}
       </div>
   </div>
-</section><!-- Equipes Section -->
+</section><!-- End Equipes Section -->
+
+<div class="container">
+  <!-- Botão de impressão -->
+<button onclick="imprimirConteudo()" class="btn btn-primary">Imprimir</button>
+</div>
 
 
+<!-- Script JavaScript para imprimir o conteúdo -->
+<script>
+  function imprimirConteudo() {
+      var conteudo = document.getElementById('equipes').innerHTML;
+      var janelaImprimir = window.open('', '', 'height=600,width=800');
+      janelaImprimir.document.write('<html><head><title>Imprimir Equipes</title>');
+      janelaImprimir.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">');
+      janelaImprimir.document.write('</head><body>');
+      janelaImprimir.document.write(conteudo);
+      janelaImprimir.document.write('</body></html>');
+      janelaImprimir.document.close();
+      janelaImprimir.print();
+  }
+</script>
 
 
 

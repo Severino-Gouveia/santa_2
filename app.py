@@ -93,6 +93,8 @@ def enviar():
 def thanks():
     return render_template('thanks.html')
 
+
+
 @app.route('/form.html/<domingo>', methods=['GET', 'POST'])
 def form(domingo):
     if request.method == 'POST':

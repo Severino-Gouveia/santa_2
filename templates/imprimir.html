@@ -73,65 +73,80 @@
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="hero-container" data-aos="fade-in">
       <h1>Ministério Liturgico </h1>
-      <p>Santa Cecília | <span class="typed" data-typed-items="Ola admin!"></span></p>
+      <p>Santa Cecília | <span class="typed" data-typed-items="Ola !"></span></p>
     </div>
   </section><!-- End Hero -->
 
  
-  
 
 
-<!-- ======= Contact Section ======= -->
-<section id="contact" class="contact">
-    <div class="container">
-        <div class="section-title">
-            <h2>Este botão apaga a tabela</h2>
-           
-            <div class="container mt-5">
-            
-                <form method="POST" action="{{ url_for('apagar_dados') }}">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal">
-                        Apagar Dados
-                    </button>
-            
-                    <!-- Modal -->
-                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Você tem certeza que deseja apagar todos os dados?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-danger">Apagar Dados</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+<!-- Equipes Section -->
+<section id="equipes" class="contact">
+  <div class="container">
+      <div class="section-title">
+          <h2>Equipes</h2>
+      </div>
           
-        </div>
-    </div>
-  </section><!-- End Contact Section -->
-
-  <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact">
-    <div class="container">
-        <div class="section-title">
-            <h2>Este botão tira os carroeis</h2>
+            <!-- Equipes Section -->
+            <section id="equipes" class="contact">
+              <div class="container">
+                  <div class="section-title">
+                      <h2>Equipes</h2>
+                  </div>
+                  <div class="container mt-5">
+                      <!-- Renderização dinâmica das equipes -->
+                      {% for carousel_item in carousel_items %}
+                      <div class="card">
+                          <div class="card-header">
+                              <h3 class="card-title">{{ carousel_item.link_text }}</h3>
+                              <h3 class="card-title">{{ carousel_item.team_type }}</h3>
+                          </div>
+                          <div class="card-body">
+                              <table class="table table-bordered">
+                                  <thead class="thead-dark">
+                                      <tr>
+                                          <th>Nome</th>
+                                          <th>Função</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      {% for resposta in carousel_item.respostas %}
+                                      <tr>
+                                          <td>{{ resposta.nome }}</td>
+                                          <td>{{ "Tocar" if resposta.tocar else "" }}{{ "Cantar" if resposta.cantar else "" }}</td>
+                                      </tr>
+                                      {% endfor %}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      {% endfor %}
+                  </div>
+              </div>
+          </section><!-- End Equipes Section -->
           
-        </div>
-    </div>
-  </section><!-- End Contact Section -->
+          <!-- Botão de impressão -->
+          <button onclick="imprimirConteudo()" class="btn btn-primary">Imprimir</button>
 
-  
+      </div>
+  </div>
+</section><!-- End Contact Section -->
+
+
+<!-- Script JavaScript para imprimir o conteúdo -->
+<script>
+  function imprimirConteudo() {
+      var conteudo = document.getElementById('equipes').innerHTML;
+      var janelaImprimir = window.open('', '', 'height=600,width=800');
+      janelaImprimir.document.write('<html><head><title>Imprimir Equipes</title>');
+      janelaImprimir.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">');
+      janelaImprimir.document.write('</head><body>');
+      janelaImprimir.document.write(conteudo);
+      janelaImprimir.document.write('</body></html>');
+      janelaImprimir.document.close();
+      janelaImprimir.print();
+  }
+</script>
 
 
 <!-- jQuery -->
