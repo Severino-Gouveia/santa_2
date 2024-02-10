@@ -206,15 +206,11 @@
               </div>
           </div>
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="https://formsubmit.co/severinogouveia59@gmail.com" method="POST" role="form" class="php-email-form">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_next" value="http://127.0.0.1:5000" >
-
-
+            <form action="{{ url_for('enviar_formulario_email') }}" method="post" role="form" class="php-email-form">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name">Seu Nome</label>
-                        <input type="text" name="name" class="form-control" id="name" required>
+                        <input type="text" name="nome" class="form-control" id="nome" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="email">Seu Email</label>
@@ -223,34 +219,28 @@
                 </div>
                 <div class="form-group">
                     <label for="subject">Assunto</label>
-                    <input type="text" class="form-control" name="subject" id="subject" required>
+                    <input type="text" class="form-control" name="assunto" id="assunto" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Mensagem</label>
-                    <textarea class="form-control" name="message" rows="10" required></textarea>
+                    <textarea class="form-control" name="mensagem" id="mensagem" rows="10" required></textarea>
                 </div>
                 <div class="my-3">
                     <div class="loading">Carregando</div>
                     <div class="error-message"></div>
                     <div class="sent-message">Sua mensagem foi enviada. Obrigado!</div>
                 </div>
-                <div class="text-center"><button type="submit" id="submitButton">Enviar Mensagem</button></div>
-
-                <a href="{{ url_for('thanks') }}" id="thanksLink"></a>
-
-               
+                <div class="text-center"><button type="submit">Enviar Mensagem</button></div>
             </form>
         </div>
         
-      </div>
-  </div>
-</section><!-- End Contact Section -->
 
-<script>
-  document.getElementById('submitButton').addEventListener('click', function() {
-      document.getElementById('thanksLink').click();
-  });
-</script>
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+
   
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -262,7 +252,7 @@
       </div>
     </div>
   </footer><!-- End  Footer -->
-
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 

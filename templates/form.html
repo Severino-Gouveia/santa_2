@@ -38,9 +38,8 @@
 
 <body>
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-
+   <!-- ======= Mobile nav toggle button ======= -->
+   <i class="bi bi-list mobile-nav-toggle d-x-none"></i>
   <!-- ======= Header ======= -->
   <header id="header">
     <div class="d-flex flex-column">
@@ -80,7 +79,7 @@
 <section id="about" class="about">
   <div class="container">
     <div class="section-title">
-      <h2> {{ domingo }}</h2>
+      <h2> {{ domingo }} | {{ carousel_item.caption }} | {{ carousel_item.team_type }}</h2>
       <div class="container mt-5">
         <div class="row justify-content-center">
           <div class="col-md-6">
@@ -95,11 +94,11 @@
               </div>
               <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="tocar" name="tocar">
-                  <label class="form-check-label" for="tocar">Irá tocar?</label>
+                  <label class="form-check-label" for="tocar">Você pretende tocar nessa missa?</label>
               </div>
               <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="cantar" name="cantar">
-                  <label class="form-check-label" for="cantar">Irá cantar?</label>
+                  <label class="form-check-label" for="cantar">Você pretende cantar nessa missa?</label>
               </div>
            
               <div class="form-check">
@@ -110,7 +109,7 @@
                   <label for="email">E-mail:</label>
                   <input type="email" class="form-control" id="email" name="email">
               </div>
-              <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+              <button id="confirmarEnvio" type="submit" class="btn btn-primary mt-3">Enviar</button>
           </form>
           
           </div>
@@ -121,35 +120,27 @@
 </section><!-- End form Section -->
 
 
-<!-- Adicione um botão de confirmação após o formulário -->
 
-
-<!-- Modal de confirmação -->
-<div class="modal fade" id="confirmacaoModal" tabindex="-1" role="dialog" aria-labelledby="confirmacaoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmacaoModalLabel">Confirmação de Envio</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-          
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="confirmarEnvio">ok</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-    // Adicione um script para processar o envio do formulário
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('confirmarEnvio').addEventListener('click', function () {
-            document.getElementById('meuFormulario').submit(); // Envie o formulário
-        });
-    });
+  // Função para exibir a mensagem de confirmação
+  function mostrarMensagem() {
+      alert("Email enviado com sucesso!");
+  }
+
+  // Adicione um evento de escuta ao formulário para chamar a função mostrarMensagem() quando o formulário for enviado
+  document.getElementById("meuFormulario").addEventListener("submit", function (event) {
+      // Prevenir o comportamento padrão de envio do formulário
+      event.preventDefault();
+      mostrarMensagem();
+  });
+
+  // Adicione um script para processar o envio do formulário
+  document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('confirmarEnvio').addEventListener('click', function () {
+          document.getElementById('meuFormulario').submit(); // Envie o formulário
+      });
+  });
 </script>
 
 

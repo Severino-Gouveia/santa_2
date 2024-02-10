@@ -172,7 +172,7 @@ h6 {
   padding-right: 30px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 4000px) {
   #header {
     left: -300px;
   }
@@ -1132,7 +1132,7 @@ section {
   color: #eaebf0;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 4000px) {
   #footer {
     position: static;
     width: auto;
