@@ -107,8 +107,6 @@ def enviar():
     resposta = Resposta(nome=nome, tocar=tocar, cantar=cantar, receber_email=receber_email, email=email, evento=evento, carousel_item_id=carousel_item_id)  # Adiciona o evento à resposta
     db.session.add(resposta)
     db.session.commit()
-
-
     return redirect(url_for('index'))
 
 @app.route('/enviar_email', methods=['POST'])

@@ -123,25 +123,29 @@
 
 
 <script>
-  // Função para exibir a mensagem de confirmação
-  function mostrarMensagem() {
-      alert("Email enviado com sucesso!");
-  }
-
-  // Adicione um evento de escuta ao formulário para chamar a função mostrarMensagem() quando o formulário for enviado
-  document.getElementById("meuFormulario").addEventListener("submit", function (event) {
-      // Prevenir o comportamento padrão de envio do formulário
-      event.preventDefault();
-      mostrarMensagem();
-  });
-
-  // Adicione um script para processar o envio do formulário
   document.addEventListener('DOMContentLoaded', function () {
+      // Função para exibir a mensagem de confirmação
+      function mostrarMensagem() {
+          alert("Obrigado! Você será redirecionado para a página inicial!");
+      }
+
+      // Adicione um evento de escuta ao formulário para chamar a função mostrarMensagem() quando o formulário for enviado
+      document.getElementById("meuFormulario").addEventListener("submit", function (event) {
+          // Prevenir o comportamento padrão de envio do formulário
+          event.preventDefault();
+          mostrarMensagem();
+          document.getElementById('meuFormulario').reset(); // Resetar o formulário após o envio
+      });
+
+      // Adicione um script para processar o envio do formulário
       document.getElementById('confirmarEnvio').addEventListener('click', function () {
           document.getElementById('meuFormulario').submit(); // Envie o formulário
       });
   });
 </script>
+
+
+
 
 
  
