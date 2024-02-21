@@ -1,14 +1,17 @@
-   /* Estilo para o carrossel */
-   #carouselExampleControls {
-    max-width: 800px; /* Defina a largura máxima do carrossel conforme necessário */
-    margin: auto; /* Centralize o carrossel na tela */
+/* Estilo para o carrossel */
+#carouselExampleControls {
+  max-width: 800px; 
+  margin: auto; 
 }
 
-/* Estilo para as imagens no carrossel */
+/* Estilo para as imagens dentro do carrossel */
 #carouselExampleControls img {
-    max-width: 100%; /* Faça com que as imagens se ajustem à largura máxima do contêiner do carrossel */
-    height: auto; /* Mantenha a proporção original da imagem */
+  max-width: 100%; /* Garante que a imagem não ultrapasse a largura do contêiner do carrossel */
+  height: 500px; /* Define a altura desejada para as imagens */
+  object-fit: cover; /* Redimensiona a imagem mantendo a proporção e cortando o excesso */
 }
+
+
 
 .carousel-caption {
     background-color: rgba(0, 0, 0, 0.5);
