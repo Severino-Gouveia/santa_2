@@ -5,7 +5,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.form.upload import ImageUploadField
 from flask_mail import Mail, Message
-from PIL import Image
+
 
 
 
