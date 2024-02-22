@@ -8,6 +8,7 @@ from flask_mail import Mail, Message
 from PIL import Image
 
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dados.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
