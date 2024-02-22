@@ -94,7 +94,8 @@
           <div class="carousel-inner">
               {% for carousel_item in carousel_items %}
               <div class="carousel-item {% if loop.first %}active{% endif %}">
-                  <img src="{{ url_for('static', filename='img/' + carousel_item.image_filename) }}" class="d-block w-100" alt="{{ carousel_item.image_alt }}">
+                <img src="{{ url_for('static', filename='img/' + carousel_item.image_filename) }}" class="d-block w-100" alt="{{ carousel_item.caption }}">
+
                   <div class="carousel-caption d-md-block">
                       <h3><a href="{{ url_for('form', domingo=carousel_item.link_text) }}">{{ carousel_item.link_text }}</a></h3>
                       <p>{{ carousel_item.caption }} | {{ carousel_item.team_type }}</p>
